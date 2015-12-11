@@ -1,0 +1,17 @@
+D:\Programming\Chat\Chat\bin\Debug\Chat.exe.config
+D:\Programming\Chat\Chat\bin\Debug\Chat.exe
+D:\Programming\Chat\Chat\bin\Debug\Chat.pdb
+D:\Programming\Chat\Chat\obj\Debug\Chat.Form1.resources
+D:\Programming\Chat\Chat\obj\Debug\Chat.csproj.GenerateResource.Cache
+D:\Programming\Chat\Chat\obj\Debug\Chat.exe
+D:\Programming\Chat\Chat\obj\Debug\Chat.pdb
+D:\Programming\Chat\Chat\obj\Debug\Chat.csprojResolveAssemblyReference.cache
+D:\Programming\Chat\Chat\obj\Debug\Chat.About.resources
+D:\Programming\Chat\Chat\obj\Debug\Chat.Bookmarks.resources
+D:\Programming\Chat\Chat\bin\Debug\Resources\help.html
+D:\Programming\Chat\Chat\bin\Debug\Resources\icon.ico
+D:\Programming\Chat\Chat\bin\Debug\Chat.exe.manifest
+D:\Programming\Chat\Chat\bin\Debug\Chat.application
+D:\Programming\Chat\Chat\obj\Debug\Chat.TrustInfo.xml
+D:\Programming\Chat\Chat\obj\Debug\Chat.exe.manifest
+D:\Programming\Chat\Chat\obj\Debug\Chat.application
