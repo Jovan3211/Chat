@@ -49,11 +49,12 @@
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(20, 66);
+            this.label1.Location = new System.Drawing.Point(10, 60);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(244, 13);
+            this.label1.Size = new System.Drawing.Size(264, 26);
             this.label1.TabIndex = 1;
-            this.label1.Text = "This program has no licence. Use it as you please.";
+            this.label1.Text = "This program uses the:\r\nAttribution-NonCommercial-ShareAlike 4.0 International\r\n";
+            this.label1.TextAlign = System.Drawing.ContentAlignment.TopCenter;
             // 
             // label2
             // 
