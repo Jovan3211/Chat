@@ -26,8 +26,8 @@
     <UpdateUrl>http://potato.mucak.net/updates/Chat/</UpdateUrl>
     <ProductName>Direct Chat</ProductName>
     <PublisherName>Jovan</PublisherName>
-    <ApplicationRevision>1</ApplicationRevision>
-    <ApplicationVersion>0.2.7.%2a</ApplicationVersion>
+    <ApplicationRevision>0</ApplicationRevision>
+    <ApplicationVersion>0.2.10.0</ApplicationVersion>
     <UseApplicationTrust>false</UseApplicationTrust>
     <CreateDesktopShortcut>true</CreateDesktopShortcut>
     <PublishWizardCompleted>true</PublishWizardCompleted>

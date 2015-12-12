@@ -56,6 +56,8 @@
             this.bookmarkListToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.encryptionToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.comingSoonToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.settingsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.profileToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.helpToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.helpToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripSeparator2 = new System.Windows.Forms.ToolStripSeparator();
@@ -63,8 +65,8 @@
             this.statusStrip1 = new System.Windows.Forms.StatusStrip();
             this.toolStripStatusLabel1 = new System.Windows.Forms.ToolStripStatusLabel();
             this.toolTip1 = new System.Windows.Forms.ToolTip(this.components);
-            this.settingsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.profileToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.button_sendFile = new System.Windows.Forms.Button();
+            this.openFileDialog1 = new System.Windows.Forms.OpenFileDialog();
             this.groupBoxYou.SuspendLayout();
             this.groupBoxFriend.SuspendLayout();
             this.menuStrip1.SuspendLayout();
@@ -177,7 +179,7 @@
             this.listBox_chat.FormattingEnabled = true;
             this.listBox_chat.Location = new System.Drawing.Point(12, 133);
             this.listBox_chat.Name = "listBox_chat";
-            this.listBox_chat.Size = new System.Drawing.Size(487, 225);
+            this.listBox_chat.Size = new System.Drawing.Size(549, 225);
             this.listBox_chat.TabIndex = 2;
             // 
             // textBox_toSend
@@ -186,14 +188,14 @@
             | System.Windows.Forms.AnchorStyles.Right)));
             this.textBox_toSend.Location = new System.Drawing.Point(12, 364);
             this.textBox_toSend.Name = "textBox_toSend";
-            this.textBox_toSend.Size = new System.Drawing.Size(406, 20);
+            this.textBox_toSend.Size = new System.Drawing.Size(438, 20);
             this.textBox_toSend.TabIndex = 3;
             this.textBox_toSend.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.textBox_toSend_KeyPress);
             // 
             // button_Send
             // 
             this.button_Send.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.button_Send.Location = new System.Drawing.Point(424, 361);
+            this.button_Send.Location = new System.Drawing.Point(456, 362);
             this.button_Send.Name = "button_Send";
             this.button_Send.Size = new System.Drawing.Size(75, 23);
             this.button_Send.TabIndex = 4;
@@ -231,7 +233,7 @@
             this.helpToolStripMenuItem});
             this.menuStrip1.Location = new System.Drawing.Point(0, 0);
             this.menuStrip1.Name = "menuStrip1";
-            this.menuStrip1.Size = new System.Drawing.Size(513, 24);
+            this.menuStrip1.Size = new System.Drawing.Size(575, 24);
             this.menuStrip1.TabIndex = 7;
             this.menuStrip1.Text = "menuStrip1";
             // 
@@ -312,6 +314,20 @@
             this.comingSoonToolStripMenuItem.Size = new System.Drawing.Size(155, 22);
             this.comingSoonToolStripMenuItem.Text = "Coming soon...";
             // 
+            // settingsToolStripMenuItem
+            // 
+            this.settingsToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.profileToolStripMenuItem});
+            this.settingsToolStripMenuItem.Name = "settingsToolStripMenuItem";
+            this.settingsToolStripMenuItem.Size = new System.Drawing.Size(61, 20);
+            this.settingsToolStripMenuItem.Text = "Settings";
+            // 
+            // profileToolStripMenuItem
+            // 
+            this.profileToolStripMenuItem.Name = "profileToolStripMenuItem";
+            this.profileToolStripMenuItem.Size = new System.Drawing.Size(108, 22);
+            this.profileToolStripMenuItem.Text = "Profile";
+            // 
             // helpToolStripMenuItem
             // 
             this.helpToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
@@ -326,19 +342,19 @@
             // 
             this.helpToolStripMenuItem1.Name = "helpToolStripMenuItem1";
             this.helpToolStripMenuItem1.ShortcutKeyDisplayString = "F1";
-            this.helpToolStripMenuItem1.Size = new System.Drawing.Size(152, 22);
+            this.helpToolStripMenuItem1.Size = new System.Drawing.Size(146, 22);
             this.helpToolStripMenuItem1.Text = "View Help";
             this.helpToolStripMenuItem1.Click += new System.EventHandler(this.helpToolStripMenuItem1_Click);
             // 
             // toolStripSeparator2
             // 
             this.toolStripSeparator2.Name = "toolStripSeparator2";
-            this.toolStripSeparator2.Size = new System.Drawing.Size(149, 6);
+            this.toolStripSeparator2.Size = new System.Drawing.Size(143, 6);
             // 
             // aboutToolStripMenuItem
             // 
             this.aboutToolStripMenuItem.Name = "aboutToolStripMenuItem";
-            this.aboutToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.aboutToolStripMenuItem.Size = new System.Drawing.Size(146, 22);
             this.aboutToolStripMenuItem.Text = "About";
             this.aboutToolStripMenuItem.Click += new System.EventHandler(this.aboutToolStripMenuItem_Click);
             // 
@@ -348,7 +364,7 @@
             this.toolStripStatusLabel1});
             this.statusStrip1.Location = new System.Drawing.Point(0, 393);
             this.statusStrip1.Name = "statusStrip1";
-            this.statusStrip1.Size = new System.Drawing.Size(513, 22);
+            this.statusStrip1.Size = new System.Drawing.Size(575, 22);
             this.statusStrip1.TabIndex = 8;
             this.statusStrip1.Text = "statusStrip1";
             // 
@@ -358,25 +374,27 @@
             this.toolStripStatusLabel1.Size = new System.Drawing.Size(118, 17);
             this.toolStripStatusLabel1.Text = "toolStripStatusLabel1";
             // 
-            // settingsToolStripMenuItem
+            // button_sendFile
             // 
-            this.settingsToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.profileToolStripMenuItem});
-            this.settingsToolStripMenuItem.Name = "settingsToolStripMenuItem";
-            this.settingsToolStripMenuItem.Size = new System.Drawing.Size(61, 20);
-            this.settingsToolStripMenuItem.Text = "Settings";
+            this.button_sendFile.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+            this.button_sendFile.Location = new System.Drawing.Point(537, 362);
+            this.button_sendFile.Name = "button_sendFile";
+            this.button_sendFile.Size = new System.Drawing.Size(26, 23);
+            this.button_sendFile.TabIndex = 9;
+            this.button_sendFile.Text = "...";
+            this.button_sendFile.UseVisualStyleBackColor = true;
+            this.button_sendFile.Click += new System.EventHandler(this.button_sendFile_Click);
             // 
-            // profileToolStripMenuItem
+            // openFileDialog1
             // 
-            this.profileToolStripMenuItem.Name = "profileToolStripMenuItem";
-            this.profileToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
-            this.profileToolStripMenuItem.Text = "Profile";
+            this.openFileDialog1.FileName = "openFileDialog1";
             // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(513, 415);
+            this.ClientSize = new System.Drawing.Size(575, 415);
+            this.Controls.Add(this.button_sendFile);
             this.Controls.Add(this.statusStrip1);
             this.Controls.Add(this.button_Disconnect);
             this.Controls.Add(this.button_Connect);
@@ -443,6 +461,8 @@
         private System.Windows.Forms.ToolTip toolTip1;
         private System.Windows.Forms.ToolStripMenuItem settingsToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem profileToolStripMenuItem;
+        private System.Windows.Forms.Button button_sendFile;
+        private System.Windows.Forms.OpenFileDialog openFileDialog1;
     }
 }
 

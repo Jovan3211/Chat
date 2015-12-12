@@ -3,6 +3,7 @@ using System.Text;
 using System.Windows.Forms;
 using System.Net;
 using System.Net.Sockets;
+using System.IO;
 using encryption = Chat.Encryption;
 
 namespace Chat
@@ -111,6 +112,18 @@ namespace Chat
             form.Show();
         }
 
+        //select a file to send.
+        private void button_sendFile_Click(object sender, EventArgs e)
+        {
+            string path = "/ftp ";
+            openFileDialog1.Filter = "All files (*.*)|*.*";
+            if (openFileDialog1.ShowDialog() == DialogResult.OK)
+            {
+                path += Path.GetDirectoryName(openFileDialog1.FileName) + "\\" + Path.GetFileName(openFileDialog1.FileName);
+                textBox_toSend.Text = path;
+            }
+        }
+
         //function to connect to an ip
         private void connect()
         {
@@ -119,8 +132,14 @@ namespace Chat
             if (!socket.IsBound)
             {
                 //binding socket
-                epLocal = new IPEndPoint(IPAddress.Parse(textBox_IP1.Text), Convert.ToInt32(textBox_Port1.Text));
-                socket.Bind(epLocal);
+                try {
+                    epLocal = new IPEndPoint(IPAddress.Parse(textBox_IP1.Text), Convert.ToInt32(textBox_Port1.Text));
+                    socket.Bind(epLocal);
+                }
+                catch (Exception e)
+                {
+                    MessageBox.Show(e.Message, "Error binding socket");
+                }
             }
             else if (!socket.Connected)
             {
@@ -128,19 +147,22 @@ namespace Chat
             }
 
             //connecting to remote IP
-            epRemote = new IPEndPoint(IPAddress.Parse(textBox_IP2.Text), Convert.ToInt32(textBox_Port2.Text));
-            socket.Connect(epRemote);
+            try {
+                epRemote = new IPEndPoint(IPAddress.Parse(textBox_IP2.Text), Convert.ToInt32(textBox_Port2.Text));
+                socket.Connect(epRemote);
 
-            //listening to the specific port
-            buffer = new byte[1500];
-            socket.BeginReceiveFrom(buffer, 0, buffer.Length, SocketFlags.None, ref epRemote, new AsyncCallback(MessageCallBack), buffer);
+                //listening to the specific port
+                buffer = new byte[1500];
+                socket.BeginReceiveFrom(buffer, 0, buffer.Length, SocketFlags.None, ref epRemote, new AsyncCallback(MessageCallBack), buffer);
 
-            toolStripStatusLabel1.Text = "Connected to: " + textBox_IP2.Text + ":" + textBox_Port2.Text;
-            /*}
-            else
+                listBox_chat.Items.Add("Client: Connected to " + textBox_IP2.Text);
+                toolStripStatusLabel1.Text = "Connected to: " + textBox_IP2.Text + ":" + textBox_Port2.Text;
+                listBox_chat.Items.Add("Type in '/help' to view a list of available commands.");
+            }
+            catch (Exception e)
             {
-                MessageBox.Show("Please fill out all of the IP and Port fields.", "Error");
-            }*/
+                MessageBox.Show(e.Message, "Error connecting to remote IP");
+            }
         }
 
         //function to disconnect from an ip
@@ -151,14 +173,14 @@ namespace Chat
                 try
                 {
                     socket.Shutdown(SocketShutdown.Both);
+                    socket.Close();
                     toolStripStatusLabel1.Text = "Disconnected";
+                    listBox_chat.Items.Add("Client: Disconnected from the current session.");
                 }
                 catch (Exception e)
                 {
                     MessageBox.Show(e.ToString());
                 }
-
-                //socket.Dispose();
             }
             else
             {
@@ -171,17 +193,65 @@ namespace Chat
         {
             if (socket.Connected)
             {
-                //convert string message to byte[]
-                ASCIIEncoding aEncoding = new ASCIIEncoding();
-                byte[] sendingMessage = new byte[1500];
-                sendingMessage = aEncoding.GetBytes(textBox_toSend.Text);
-                
-                //sending message
-                socket.Send(sendingMessage);
+                //checks if the input message is a command, if it is, execute it
+                int index = textBox_toSend.Text.IndexOf("/");
+                if (textBox_toSend.Text.Contains("/") && index == 0)
+                {
+                    //show all text commands
+                    if (textBox_toSend.Text.Contains("/help"))
+                    {
+                        listBox_chat.Items.Add("Available commands:");
+                        listBox_chat.Items.Add("/help - Displays this text.");
+                        listBox_chat.Items.Add("/ftp <path> - Sends a file to the connected friend.");
+                        listBox_chat.Items.Add("/disconnect - Disconnect from the current friend.");
 
-                //adding to listbox
-                listBox_chat.Items.Add(DateTime.Now.ToString("HH:mm:ss") + " Sent: " + textBox_toSend.Text);
-                textBox_toSend.Text = "";
+                        textBox_toSend.Text = "";
+                    }
+
+                    //command for sending files
+                    else if (textBox_toSend.Text.Contains("/ftp"))
+                    {
+                        string path = textBox_toSend.Text.Split(' ')[1];
+                        if (File.Exists(path))
+                        {
+                            socket.SendFile(path);
+                            listBox_chat.Items.Add("Sending '" + path + "' to " + textBox_IP2.Text);
+                            textBox_toSend.Text = "";
+                        }
+                        else
+                        {
+                            MessageBox.Show("The selected file does not exist!\n" + path, "Error sending file");
+                        }
+                    }
+
+                    //command for disconnecting
+                    else if (textBox_toSend.Text.Contains("/disconnect"))
+                    {
+                        disconnect();
+                    }
+
+                    //display error if unkown command
+                    else
+                    {
+                        listBox_chat.Items.Add("Unkown command. Type in '/help' for a list of commands.");
+                        textBox_toSend.Text = "";
+                    }
+                }
+                else
+                {
+                    //send message normaly
+                    //convert string message to byte[]
+                    ASCIIEncoding aEncoding = new ASCIIEncoding();
+                    byte[] sendingMessage = new byte[1500];
+                    sendingMessage = aEncoding.GetBytes(textBox_toSend.Text);
+
+                    //sending message
+                    socket.Send(sendingMessage);
+
+                    //adding to listbox
+                    listBox_chat.Items.Add(DateTime.Now.ToString("HH:mm:ss") + " Sent: " + textBox_toSend.Text);
+                    textBox_toSend.Text = "";
+                }
 
                 listBox_chat.SelectedIndex = listBox_chat.Items.Count - 1;
                 listBox_chat.SelectedIndex = -1;
