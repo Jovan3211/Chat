@@ -106,6 +106,12 @@ namespace Chat
             form.Show();
         }
 
+        private void openSettingsToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            Settings form = new Settings();
+            form.Show();
+        }
+
         //select a file to send.
         private void button_sendFile_Click(object sender, EventArgs e)
         {

@@ -54,10 +54,7 @@
             this.bookmarksToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.addCurrentToBookmarksToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.bookmarkListToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.encryptionToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.comingSoonToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.settingsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.profileToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.helpToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.helpToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripSeparator2 = new System.Windows.Forms.ToolStripSeparator();
@@ -67,6 +64,7 @@
             this.toolTip1 = new System.Windows.Forms.ToolTip(this.components);
             this.button_sendFile = new System.Windows.Forms.Button();
             this.openFileDialog1 = new System.Windows.Forms.OpenFileDialog();
+            this.openSettingsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.groupBoxYou.SuspendLayout();
             this.groupBoxFriend.SuspendLayout();
             this.menuStrip1.SuspendLayout();
@@ -228,7 +226,6 @@
             this.menuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.connectionToolStripMenuItem,
             this.bookmarksToolStripMenuItem,
-            this.encryptionToolStripMenuItem,
             this.settingsToolStripMenuItem,
             this.helpToolStripMenuItem});
             this.menuStrip1.Location = new System.Drawing.Point(0, 0);
@@ -298,36 +295,16 @@
             this.bookmarkListToolStripMenuItem.Name = "bookmarkListToolStripMenuItem";
             this.bookmarkListToolStripMenuItem.ShortcutKeyDisplayString = "Ctrl+B";
             this.bookmarkListToolStripMenuItem.Size = new System.Drawing.Size(213, 22);
-            this.bookmarkListToolStripMenuItem.Text = "Bookmark list";
+            this.bookmarkListToolStripMenuItem.Text = "Bookmark list...";
             this.bookmarkListToolStripMenuItem.Click += new System.EventHandler(this.bookmarkListToolStripMenuItem_Click);
-            // 
-            // encryptionToolStripMenuItem
-            // 
-            this.encryptionToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.comingSoonToolStripMenuItem});
-            this.encryptionToolStripMenuItem.Name = "encryptionToolStripMenuItem";
-            this.encryptionToolStripMenuItem.Size = new System.Drawing.Size(76, 20);
-            this.encryptionToolStripMenuItem.Text = "Encryption";
-            // 
-            // comingSoonToolStripMenuItem
-            // 
-            this.comingSoonToolStripMenuItem.Name = "comingSoonToolStripMenuItem";
-            this.comingSoonToolStripMenuItem.Size = new System.Drawing.Size(155, 22);
-            this.comingSoonToolStripMenuItem.Text = "Coming soon...";
             // 
             // settingsToolStripMenuItem
             // 
             this.settingsToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.profileToolStripMenuItem});
+            this.openSettingsToolStripMenuItem});
             this.settingsToolStripMenuItem.Name = "settingsToolStripMenuItem";
             this.settingsToolStripMenuItem.Size = new System.Drawing.Size(61, 20);
             this.settingsToolStripMenuItem.Text = "Settings";
-            // 
-            // profileToolStripMenuItem
-            // 
-            this.profileToolStripMenuItem.Name = "profileToolStripMenuItem";
-            this.profileToolStripMenuItem.Size = new System.Drawing.Size(108, 22);
-            this.profileToolStripMenuItem.Text = "Profile";
             // 
             // helpToolStripMenuItem
             // 
@@ -390,6 +367,13 @@
             // 
             this.openFileDialog1.FileName = "openFileDialog1";
             // 
+            // openSettingsToolStripMenuItem
+            // 
+            this.openSettingsToolStripMenuItem.Name = "openSettingsToolStripMenuItem";
+            this.openSettingsToolStripMenuItem.Size = new System.Drawing.Size(156, 22);
+            this.openSettingsToolStripMenuItem.Text = "Open settings...";
+            this.openSettingsToolStripMenuItem.Click += new System.EventHandler(this.openSettingsToolStripMenuItem_Click);
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -450,20 +434,18 @@
         private System.Windows.Forms.ToolStripMenuItem disconnectToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem quitToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem bookmarksToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem encryptionToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem helpToolStripMenuItem1;
         private System.Windows.Forms.ToolStripMenuItem aboutToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem comingSoonToolStripMenuItem;
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator1;
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator2;
         private System.Windows.Forms.ToolStripMenuItem addCurrentToBookmarksToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem bookmarkListToolStripMenuItem;
         private System.Windows.Forms.ToolTip toolTip1;
         private System.Windows.Forms.ToolStripMenuItem settingsToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem profileToolStripMenuItem;
         private System.Windows.Forms.Button button_sendFile;
         private System.Windows.Forms.OpenFileDialog openFileDialog1;
         public System.Windows.Forms.TextBox textBox_IP2;
+        private System.Windows.Forms.ToolStripMenuItem openSettingsToolStripMenuItem;
     }
 }
 
