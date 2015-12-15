@@ -3,6 +3,7 @@ using System.IO;
 using System.Net;
 using System.Text;
 using System.Media;
+using System.Diagnostics;
 using System.Net.Sockets;
 using System.Windows.Forms;
 using encryption = Chat.Encryption;
@@ -113,6 +114,52 @@ namespace Chat
             form.Show();
         }
 
+        //copy
+        private void copyToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            CopyAction();
+        }
+
+        //paste
+        private void pasteToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            PasteAction();
+        }
+
+        //save chat
+        private void saveChatToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            SaveFileDialog diag = new SaveFileDialog();
+            diag.Filter = "txt files (*.txt)|*.txt|All files (*.*)|*.*";
+
+            if (diag.ShowDialog() == DialogResult.OK)
+            {
+                try {
+                    using (StreamWriter stream = new StreamWriter(diag.FileName.ToString()))
+                    {
+                        for (int i = 0; i < textBox_Chat.Lines.Length; i++)
+                        {
+                            stream.WriteLine(textBox_Chat.Lines[i]);
+                        }
+                    }
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show(ex.Message, "Error saving chat");
+                }
+            }
+        }
+
+        //clear chat
+        private void clearChatToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            DialogResult dialogResult = MessageBox.Show("Are you sure you want to delete the current chat log?\n\nThis will NOT clear the chat for the other client!", "Delete current chat", MessageBoxButtons.YesNo);
+            if (dialogResult == DialogResult.Yes)
+            {
+                textBox_Chat.Clear();
+            }
+        }
+
         //select a file to send.
         private void button_sendFile_Click(object sender, EventArgs e)
         {
@@ -123,6 +170,12 @@ namespace Chat
                 path += Path.GetDirectoryName(openFileDialog1.FileName) + "\\" + Path.GetFileName(openFileDialog1.FileName);
                 textBox_toSend.Text = path;
             }
+        }
+
+        //open link
+        private void textBox_Chat_LinkClicked(object sender, LinkClickedEventArgs e)
+        {
+            Process.Start(e.LinkText);
         }
 
         //function to connect to an ip
@@ -313,6 +366,17 @@ namespace Chat
                 book.add(textBox_IP2.Text, true);
                 MessageBox.Show("The current friend IP address has been added to the bookmark list.", "Added to bookmarks");
             }
+        }
+
+        //copy paste
+        void CopyAction()
+        {
+            Clipboard.SetText(textBox_Chat.SelectedText);
+        }
+        void PasteAction()
+        {
+            if (Clipboard.ContainsText())
+                textBox_Chat.Text += Clipboard.GetText(TextDataFormat.Text).ToString();
         }
 
         //autoscroll dole u textboxu
