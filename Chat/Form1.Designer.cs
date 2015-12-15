@@ -40,7 +40,6 @@
             this.label_IP2 = new System.Windows.Forms.Label();
             this.textBox_Port2 = new System.Windows.Forms.TextBox();
             this.textBox_IP2 = new System.Windows.Forms.TextBox();
-            this.listBox_chat = new System.Windows.Forms.ListBox();
             this.textBox_toSend = new System.Windows.Forms.TextBox();
             this.button_Send = new System.Windows.Forms.Button();
             this.button_Connect = new System.Windows.Forms.Button();
@@ -65,6 +64,7 @@
             this.button_sendFile = new System.Windows.Forms.Button();
             this.openFileDialog1 = new System.Windows.Forms.OpenFileDialog();
             this.openSettingsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.textBox_Chat = new System.Windows.Forms.RichTextBox();
             this.groupBoxYou.SuspendLayout();
             this.groupBoxFriend.SuspendLayout();
             this.menuStrip1.SuspendLayout();
@@ -168,17 +168,6 @@
             this.textBox_IP2.Name = "textBox_IP2";
             this.textBox_IP2.Size = new System.Drawing.Size(133, 20);
             this.textBox_IP2.TabIndex = 0;
-            // 
-            // listBox_chat
-            // 
-            this.listBox_chat.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.listBox_chat.FormattingEnabled = true;
-            this.listBox_chat.Location = new System.Drawing.Point(12, 133);
-            this.listBox_chat.Name = "listBox_chat";
-            this.listBox_chat.Size = new System.Drawing.Size(549, 225);
-            this.listBox_chat.TabIndex = 2;
             // 
             // textBox_toSend
             // 
@@ -320,19 +309,19 @@
             // 
             this.helpToolStripMenuItem1.Name = "helpToolStripMenuItem1";
             this.helpToolStripMenuItem1.ShortcutKeyDisplayString = "F1";
-            this.helpToolStripMenuItem1.Size = new System.Drawing.Size(146, 22);
+            this.helpToolStripMenuItem1.Size = new System.Drawing.Size(152, 22);
             this.helpToolStripMenuItem1.Text = "View Help";
             this.helpToolStripMenuItem1.Click += new System.EventHandler(this.helpToolStripMenuItem1_Click);
             // 
             // toolStripSeparator2
             // 
             this.toolStripSeparator2.Name = "toolStripSeparator2";
-            this.toolStripSeparator2.Size = new System.Drawing.Size(143, 6);
+            this.toolStripSeparator2.Size = new System.Drawing.Size(149, 6);
             // 
             // aboutToolStripMenuItem
             // 
             this.aboutToolStripMenuItem.Name = "aboutToolStripMenuItem";
-            this.aboutToolStripMenuItem.Size = new System.Drawing.Size(146, 22);
+            this.aboutToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
             this.aboutToolStripMenuItem.Text = "About";
             this.aboutToolStripMenuItem.Click += new System.EventHandler(this.aboutToolStripMenuItem_Click);
             // 
@@ -374,18 +363,33 @@
             this.openSettingsToolStripMenuItem.Text = "Open settings...";
             this.openSettingsToolStripMenuItem.Click += new System.EventHandler(this.openSettingsToolStripMenuItem_Click);
             // 
+            // textBox_Chat
+            // 
+            this.textBox_Chat.AcceptsTab = true;
+            this.textBox_Chat.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.textBox_Chat.BackColor = System.Drawing.Color.White;
+            this.textBox_Chat.Location = new System.Drawing.Point(12, 133);
+            this.textBox_Chat.Name = "textBox_Chat";
+            this.textBox_Chat.ReadOnly = true;
+            this.textBox_Chat.Size = new System.Drawing.Size(551, 223);
+            this.textBox_Chat.TabIndex = 10;
+            this.textBox_Chat.Text = "";
+            this.textBox_Chat.TextChanged += new System.EventHandler(this.textBox_Chat_TextChanged);
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(575, 415);
+            this.Controls.Add(this.textBox_Chat);
             this.Controls.Add(this.button_sendFile);
             this.Controls.Add(this.statusStrip1);
             this.Controls.Add(this.button_Disconnect);
             this.Controls.Add(this.button_Connect);
             this.Controls.Add(this.button_Send);
             this.Controls.Add(this.textBox_toSend);
-            this.Controls.Add(this.listBox_chat);
             this.Controls.Add(this.groupBoxFriend);
             this.Controls.Add(this.groupBoxYou);
             this.Controls.Add(this.menuStrip1);
@@ -420,7 +424,6 @@
         private System.Windows.Forms.Label label_Port2;
         private System.Windows.Forms.Label label_IP2;
         private System.Windows.Forms.TextBox textBox_Port2;
-        private System.Windows.Forms.ListBox listBox_chat;
         private System.Windows.Forms.TextBox textBox_toSend;
         private System.Windows.Forms.Button button_Send;
         private System.Windows.Forms.Button button_Connect;
@@ -446,6 +449,7 @@
         private System.Windows.Forms.OpenFileDialog openFileDialog1;
         public System.Windows.Forms.TextBox textBox_IP2;
         private System.Windows.Forms.ToolStripMenuItem openSettingsToolStripMenuItem;
+        private System.Windows.Forms.RichTextBox textBox_Chat;
     }
 }
 

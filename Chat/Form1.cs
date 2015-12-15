@@ -1,9 +1,10 @@
 ﻿using System;
-using System.Text;
-using System.Windows.Forms;
-using System.Net;
-using System.Net.Sockets;
 using System.IO;
+using System.Net;
+using System.Text;
+using System.Drawing;
+using System.Net.Sockets;
+using System.Windows.Forms;
 using encryption = Chat.Encryption;
 
 namespace Chat
@@ -155,9 +156,9 @@ namespace Chat
                 buffer = new byte[1500];
                 socket.BeginReceiveFrom(buffer, 0, buffer.Length, SocketFlags.None, ref epRemote, new AsyncCallback(MessageCallBack), buffer);
 
-                listBox_chat.Items.Add("Client: Connected to " + textBox_IP2.Text);
+                textBox_Chat.AppendText("Client: Connected to " + textBox_IP2.Text);
                 toolStripStatusLabel1.Text = "Connected to: " + textBox_IP2.Text + ":" + textBox_Port2.Text;
-                listBox_chat.Items.Add("Type in '/help' to view a list of available commands.");
+                textBox_Chat.AppendText(Environment.NewLine + "Type in '/help' to view a list of available commands.");
             }
             catch (Exception e)
             {
@@ -175,7 +176,7 @@ namespace Chat
                     socket.Shutdown(SocketShutdown.Both);
                     socket.Close();
                     toolStripStatusLabel1.Text = "Disconnected";
-                    listBox_chat.Items.Add("Client: Disconnected from the current session.");
+                    textBox_Chat.AppendText(Environment.NewLine + "Client: Disconnected from the current session.");
                 }
                 catch (Exception e)
                 {
@@ -200,10 +201,10 @@ namespace Chat
                     //show all text commands
                     if (textBox_toSend.Text.Contains("/help"))
                     {
-                        listBox_chat.Items.Add("Available commands:");
-                        listBox_chat.Items.Add("/help - Displays this text.");
-                        listBox_chat.Items.Add("/ftp <path> - Sends a file to the connected friend.");
-                        listBox_chat.Items.Add("/disconnect - Disconnect from the current friend.");
+                        textBox_Chat.AppendText(Environment.NewLine + "Available commands:");
+                        textBox_Chat.AppendText(Environment.NewLine + "/help - Displays this text.");
+                        textBox_Chat.AppendText(Environment.NewLine + "/ftp <path> - Sends a file to the connected friend.");
+                        textBox_Chat.AppendText(Environment.NewLine + "/disconnect - Disconnect from the current friend.");
 
                         textBox_toSend.Text = "";
                     }
@@ -215,7 +216,7 @@ namespace Chat
                         if (File.Exists(path))
                         {
                             socket.SendFile(path);
-                            listBox_chat.Items.Add("Sending '" + path + "' to " + textBox_IP2.Text);
+                            textBox_Chat.AppendText(Environment.NewLine + "Sending '" + path + "' to " + textBox_IP2.Text);
                             textBox_toSend.Text = "";
                         }
                         else
@@ -233,7 +234,7 @@ namespace Chat
                     //display error if unkown command
                     else
                     {
-                        listBox_chat.Items.Add("Unkown command. Type in '/help' for a list of commands.");
+                        textBox_Chat.AppendText(Environment.NewLine + "Unkown command. Type in '/help' for a list of commands.");
                         textBox_toSend.Text = "";
                     }
                 }
@@ -249,12 +250,9 @@ namespace Chat
                     socket.Send(sendingMessage);
 
                     //adding to listbox
-                    listBox_chat.Items.Add(DateTime.Now.ToString("HH:mm:ss") + " Sent: " + textBox_toSend.Text);
+                    textBox_Chat.AppendText(Environment.NewLine + DateTime.Now.ToString("HH:mm:ss") + " Sent: " + textBox_toSend.Text);
                     textBox_toSend.Text = "";
                 }
-
-                listBox_chat.SelectedIndex = listBox_chat.Items.Count - 1;
-                listBox_chat.SelectedIndex = -1;
             }
             else
             {
@@ -276,7 +274,7 @@ namespace Chat
             return "127.0.0.1";
         }
 
-        // this puts the recieved message into the listbox, i think
+        // this puts the recieved message into the listbox, i think; recieve message
         private void MessageCallBack(IAsyncResult aResult)
         {
             try
@@ -289,13 +287,10 @@ namespace Chat
                 string recievedMessage = aEncoding.GetString(recievedData);
 
                 //adding message to listbox
-                listBox_chat.Items.Add(DateTime.Now.ToString("HH:mm:ss") + " Recieved: " + recievedMessage);
+                textBox_Chat.AppendText(Environment.NewLine + DateTime.Now.ToString("HH:mm:ss") + " Recieved: " + recievedMessage);
 
                 buffer = new byte[1500];
                 socket.BeginReceiveFrom(buffer, 0, buffer.Length, SocketFlags.None, ref epRemote, new AsyncCallback(MessageCallBack), buffer);
-
-                listBox_chat.SelectedIndex = listBox_chat.Items.Count - 1;
-                listBox_chat.SelectedIndex = -1;
             }
             catch (Exception e)
             {
@@ -309,13 +304,19 @@ namespace Chat
             if (string.IsNullOrWhiteSpace(textBox_IP2.Text)) MessageBox.Show("Please specify an address in the friend IP textbox.", "No address provided");
             else
             {
-
                 Bookmarks book = new Bookmarks();
                 book.Show();
 
                 book.add(textBox_IP2.Text, true);
                 MessageBox.Show("The current friend IP address has been added to the bookmark list.", "Added to bookmarks");
             }
+        }
+
+        //autoscroll dole u textboxu
+        private void textBox_Chat_TextChanged(object sender, EventArgs e)
+        {
+            textBox_Chat.SelectionStart = textBox_Chat.Text.Length;
+            textBox_Chat.ScrollToCaret();
         }
 
         //key combinations
