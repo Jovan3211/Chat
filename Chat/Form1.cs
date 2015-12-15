@@ -2,7 +2,7 @@
 using System.IO;
 using System.Net;
 using System.Text;
-using System.Drawing;
+using System.Media;
 using System.Net.Sockets;
 using System.Windows.Forms;
 using encryption = Chat.Encryption;
@@ -291,6 +291,9 @@ namespace Chat
 
                 buffer = new byte[1500];
                 socket.BeginReceiveFrom(buffer, 0, buffer.Length, SocketFlags.None, ref epRemote, new AsyncCallback(MessageCallBack), buffer);
+                SoundPlayer play = new SoundPlayer();
+                play.SoundLocation = "Resources\\recieve.wav";
+                play.Play();
             }
             catch (Exception e)
             {

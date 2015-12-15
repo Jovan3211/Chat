@@ -16,3 +16,4 @@ D:\Programming\Chat\Chat\obj\Debug\Chat.TrustInfo.xml
 D:\Programming\Chat\Chat\obj\Debug\Chat.exe.manifest
 D:\Programming\Chat\Chat\obj\Debug\Chat.application
 D:\Programming\Chat\Chat\obj\Debug\Chat.Settings.resources
+D:\Programming\Chat\Chat\bin\Debug\Resources\recieve.wav

@@ -26,9 +26,9 @@
     <UpdateUrl>http://potato.mucak.net/updates/Chat/</UpdateUrl>
     <ProductName>Direct Chat</ProductName>
     <PublisherName>Jovan</PublisherName>
-    <MinimumRequiredVersion>0.3.0.0</MinimumRequiredVersion>
+    <MinimumRequiredVersion>0.3.1.0</MinimumRequiredVersion>
     <ApplicationRevision>0</ApplicationRevision>
-    <ApplicationVersion>0.3.0.0</ApplicationVersion>
+    <ApplicationVersion>0.3.1.0</ApplicationVersion>
     <UseApplicationTrust>false</UseApplicationTrust>
     <CreateDesktopShortcut>true</CreateDesktopShortcut>
     <PublishWizardCompleted>true</PublishWizardCompleted>
@@ -148,6 +148,9 @@
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
     <Content Include="Resources\icon.ico">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\recieve.wav">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
   </ItemGroup>
