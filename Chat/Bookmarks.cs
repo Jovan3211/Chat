@@ -1,23 +1,31 @@
 ﻿using System.Collections.Generic;
 using System.Windows.Forms;
-using System.IO;
 using System.Linq;
+using System.IO;
+using System;
 
 namespace Chat
 {
     public partial class Bookmarks : Form
     {
         string path;
-        string bookmark;
         List<string> bookmarks = new List<string>();
 
         public Bookmarks()
         {
             InitializeComponent();
+            refreshList();
+        }
+
+        //funkcija za refreshovanje liste
+        private void refreshList()
+        {
             path = "Resources\\bookmarks.txt";
+            listBox1.Items.Clear();
+
             if (!File.Exists(path))
             {
-                File.Create("Resources\\bookmarks.txt");
+                File.Create("Resources\\bookmarks.txt").Close();
             }
             else
             {
@@ -33,68 +41,52 @@ namespace Chat
             }
         }
 
-        private void add(string ip)
+        //funkcija za dodavanje adrese u bookmarks
+        public void add(string ip, bool closeAfter = false)
         {
-            if (ip == "")
+            using (StreamWriter stream = new StreamWriter(path, true))
             {
-                if (!string.IsNullOrWhiteSpace(textBox1.Text))
-                {
-                    listBox1.Items.Add(textBox1.Text);
-                    bookmark = textBox1.Text;
-                }
-                else
-                {
-                    MessageBox.Show("Please input an IP", "Error");
-                }
-            }
-            else
-            {
-                listBox1.Items.Add(ip);
-                bookmark = ip;
+                stream.WriteLine(ip);
             }
 
-            save();
+            refreshList();
+            if (closeAfter) Close();
         }
 
-        private void remove()
-        {
-            if (listBox1.SelectedIndex >= 0)
-            {
-                listBox1.Items.RemoveAt(listBox1.SelectedIndex);
-                bookmarks.Remove(listBox1.GetItemText(listBox1.SelectedItem));
-            }
-        }
-
-        private void save()
-        {
-            using (StreamWriter writer = new StreamWriter(path, false))
-            {
-                writer.WriteLine(bookmarks);
-            }
-        }
-
+        //dodavanje u bookmarks
         private void button_add_Click(object sender, System.EventArgs e)
         {
-            add("");
+            add(textBox_IP.Text);
         }
 
-        private void button_select_Click(object sender, System.EventArgs e)
-        {
-            Form1 form = new Form1();
-            form.textBox_IP2_Value = listBox1.GetItemText(listBox1.SelectedItem);
-
-            save();
-            Close();
-        }
-
+        //ne znam kako ovaj algoritam radi, al je jako seksi - uklanja iz bookmarksa
         private void button_remove_Click(object sender, System.EventArgs e)
         {
-            remove();
+            var tempFile = Path.GetTempFileName();
+            var linesToKeep = File.ReadLines(path).Where(l => l != listBox1.SelectedItem.ToString());
+
+            File.WriteAllLines(tempFile, linesToKeep);
+
+            File.Delete(path);
+            File.Move(tempFile, path);
+
+            refreshList();
         }
 
-        private void button_close_Click(object sender, System.EventArgs e)
+        private void button_select_Click(object sender, EventArgs e)
         {
-            save();
+            if (listBox1.SelectedIndex == -1)
+                MessageBox.Show("Please select an IP from the list.", "No address selected");
+            else
+            {
+                Form1 form = new Form1();
+                form.textBox_IP2.Text = listBox1.SelectedItem.ToString();
+                Close();
+            }
+        }
+
+        private void button_close_Click(object sender, EventArgs e)
+        {
             Close();
         }
     }

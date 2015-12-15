@@ -20,12 +20,6 @@ namespace Chat
             InitializeComponent();
         }
 
-        public string textBox_IP2_Value
-        {
-            get { return textBox_IP2.Text; }
-            set { textBox_IP2.Text = value; }
-        }
-
         private void Form1_Load(object sender, EventArgs e)
         {
             //setup socket
@@ -300,6 +294,21 @@ namespace Chat
             catch (Exception e)
             {
                 MessageBox.Show(e.ToString());
+            }
+        }
+
+        //add the current ip from textbox_ip2 to bookmarks
+        private void addCurrentToBookmarksToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            if (string.IsNullOrWhiteSpace(textBox_IP2.Text)) MessageBox.Show("Please specify an address in the friend IP textbox.", "No address provided");
+            else
+            {
+
+                Bookmarks book = new Bookmarks();
+                book.Show();
+
+                book.add(textBox_IP2.Text, true);
+                MessageBox.Show("The current friend IP address has been added to the bookmark list.", "Added to bookmarks");
             }
         }
 

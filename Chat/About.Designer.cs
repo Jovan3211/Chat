@@ -74,7 +74,7 @@
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(47, 14);
             this.label3.TabIndex = 3;
-            this.label3.Text = "0.2.10";
+            this.label3.Text = "0.2.11";
             // 
             // About
             // 

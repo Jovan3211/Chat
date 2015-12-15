@@ -30,7 +30,7 @@
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Bookmarks));
             this.listBox1 = new System.Windows.Forms.ListBox();
-            this.textBox1 = new System.Windows.Forms.TextBox();
+            this.textBox_IP = new System.Windows.Forms.TextBox();
             this.button_add = new System.Windows.Forms.Button();
             this.button_remove = new System.Windows.Forms.Button();
             this.label1 = new System.Windows.Forms.Label();
@@ -46,12 +46,12 @@
             this.listBox1.Size = new System.Drawing.Size(243, 212);
             this.listBox1.TabIndex = 0;
             // 
-            // textBox1
+            // textBox_IP
             // 
-            this.textBox1.Location = new System.Drawing.Point(38, 11);
-            this.textBox1.Name = "textBox1";
-            this.textBox1.Size = new System.Drawing.Size(217, 20);
-            this.textBox1.TabIndex = 1;
+            this.textBox_IP.Location = new System.Drawing.Point(38, 11);
+            this.textBox_IP.Name = "textBox_IP";
+            this.textBox_IP.Size = new System.Drawing.Size(217, 20);
+            this.textBox_IP.TabIndex = 1;
             // 
             // button_add
             // 
@@ -112,7 +112,7 @@
             this.Controls.Add(this.label1);
             this.Controls.Add(this.button_remove);
             this.Controls.Add(this.button_add);
-            this.Controls.Add(this.textBox1);
+            this.Controls.Add(this.textBox_IP);
             this.Controls.Add(this.listBox1);
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.MaximizeBox = false;
@@ -130,11 +130,11 @@
         #endregion
 
         private System.Windows.Forms.ListBox listBox1;
-        private System.Windows.Forms.TextBox textBox1;
         private System.Windows.Forms.Button button_add;
         private System.Windows.Forms.Button button_remove;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Button button_close;
         private System.Windows.Forms.Button button_select;
+        private System.Windows.Forms.TextBox textBox_IP;
     }
 }

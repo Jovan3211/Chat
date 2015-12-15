@@ -43,14 +43,14 @@
     </dependentAssembly>
   </dependency>
   <dependency>
-    <dependentAssembly dependencyType="install" allowDelayedBinding="true" codebase="Chat.exe" size="1511376">
+    <dependentAssembly dependencyType="install" allowDelayedBinding="true" codebase="Chat.exe" size="1511888">
       <assemblyIdentity name="Chat" version="1.0.0.0" language="neutral" processorArchitecture="msil" />
       <hash>
         <dsig:Transforms>
           <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
         </dsig:Transforms>
         <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha256" />
-        <dsig:DigestValue>V9Vcd0f18z/EOsDIV7EgaviG7eEHPCVsofXwCyhmXSE=</dsig:DigestValue>
+        <dsig:DigestValue>FC56/dlGulvTlLsk7XNAPE/pt9KlL0Zr6c63JBMZd2Q=</dsig:DigestValue>
       </hash>
     </dependentAssembly>
   </dependency>

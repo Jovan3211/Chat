@@ -291,6 +291,7 @@
             this.addCurrentToBookmarksToolStripMenuItem.Name = "addCurrentToBookmarksToolStripMenuItem";
             this.addCurrentToBookmarksToolStripMenuItem.Size = new System.Drawing.Size(213, 22);
             this.addCurrentToBookmarksToolStripMenuItem.Text = "Add current to bookmarks";
+            this.addCurrentToBookmarksToolStripMenuItem.Click += new System.EventHandler(this.addCurrentToBookmarksToolStripMenuItem_Click);
             // 
             // bookmarkListToolStripMenuItem
             // 
@@ -435,7 +436,6 @@
         private System.Windows.Forms.Label label_Port2;
         private System.Windows.Forms.Label label_IP2;
         private System.Windows.Forms.TextBox textBox_Port2;
-        private System.Windows.Forms.TextBox textBox_IP2;
         private System.Windows.Forms.ListBox listBox_chat;
         private System.Windows.Forms.TextBox textBox_toSend;
         private System.Windows.Forms.Button button_Send;
@@ -463,6 +463,7 @@
         private System.Windows.Forms.ToolStripMenuItem profileToolStripMenuItem;
         private System.Windows.Forms.Button button_sendFile;
         private System.Windows.Forms.OpenFileDialog openFileDialog1;
+        public System.Windows.Forms.TextBox textBox_IP2;
     }
 }
 
