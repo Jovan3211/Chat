@@ -10,6 +10,7 @@ namespace Chat
     {
         string path;
         List<string> bookmarks = new List<string>();
+        Form1 form = new Form1();
 
         public Bookmarks()
         {
@@ -79,7 +80,6 @@ namespace Chat
                 MessageBox.Show("Please select an IP from the list.", "No address selected");
             else
             {
-                Form1 form = new Form1();
                 form.textBox_IP2.Text = listBox1.SelectedItem.ToString();
                 Close();
             }

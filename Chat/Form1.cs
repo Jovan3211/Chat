@@ -3,6 +3,7 @@ using System.IO;
 using System.Net;
 using System.Text;
 using System.Media;
+using System.Drawing;
 using System.Diagnostics;
 using System.Net.Sockets;
 using System.Windows.Forms;
@@ -258,8 +259,7 @@ namespace Chat
                         textBox_Chat.AppendText(Environment.NewLine + "/help - Displays this text.");
                         textBox_Chat.AppendText(Environment.NewLine + "/ftp <path> - Sends a file to the connected friend.");
                         textBox_Chat.AppendText(Environment.NewLine + "/disconnect - Disconnect from the current friend.");
-
-                        textBox_toSend.Text = "";
+                        textBox_Chat.AppendText(Environment.NewLine + "/c <color> <message> - Sets a color for the current message.");
                     }
 
                     //command for sending files
@@ -270,7 +270,6 @@ namespace Chat
                         {
                             socket.SendFile(path);
                             textBox_Chat.AppendText(Environment.NewLine + "Sending '" + path + "' to " + textBox_IP2.Text);
-                            textBox_toSend.Text = "";
                         }
                         else
                         {
@@ -284,12 +283,28 @@ namespace Chat
                         disconnect();
                     }
 
+                    else if (textBox_toSend.Text.Contains("/c"))
+                    {
+                        string color = textBox_toSend.Text.Split(' ')[1];
+                        string message = textBox_toSend.Text.Substring(textBox_toSend.Text.IndexOf(' ') + 1).Replace(color, "");
+                        if (color == "" || message == "")
+                        {
+                            textBox_Chat.AppendText(Environment.NewLine + "Usage: /c <color> <message>");
+                        }
+                        else
+                        {
+                            Color c = Color.FromName(color);
+                            AppendText(textBox_Chat, message, c);
+                        }
+                    }
+
                     //display error if unkown command
                     else
                     {
                         textBox_Chat.AppendText(Environment.NewLine + "Unkown command. Type in '/help' for a list of commands.");
-                        textBox_toSend.Text = "";
                     }
+
+                    textBox_toSend.Text = "";
                 }
                 else
                 {
@@ -366,6 +381,17 @@ namespace Chat
                 book.add(textBox_IP2.Text, true);
                 MessageBox.Show("The current friend IP address has been added to the bookmark list.", "Added to bookmarks");
             }
+        }
+
+        //change text color
+        public static void AppendText(RichTextBox box, string text, Color color)
+        {
+            box.SelectionStart = box.TextLength;
+            box.SelectionLength = 0;
+
+            box.SelectionColor = color;
+            box.AppendText(Environment.NewLine + DateTime.Now.ToString("HH:mm:ss") + " Recieved: " + text);
+            box.SelectionColor = box.ForeColor;
         }
 
         //copy paste
